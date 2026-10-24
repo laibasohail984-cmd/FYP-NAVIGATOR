@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FYP Navigator</title>
+<style>
+:root{--bg:#f6f7fb;--surface:#fff;--text:#14182b;--muted:#5d6480;--accent:#3b5bfd;--accent-soft:#e6eaff;--border:#dfe3f0;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1220;--surface:#181c30;--text:#eef0fa;--muted:#9aa2c4;--accent:#7b92ff;--accent-soft:#242b50;--border:#2a3052;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1220;--surface:#181c30;--text:#eef0fa;--muted:#9aa2c4;--accent:#7b92ff;--accent-soft:#242b50;--border:#2a3052;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font-weight:800;font-size:1.2rem;letter-spacing:-.02em}.logo span{color:var(--accent)}
+nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-size:.95rem}
+.hero{margin-top:8px;padding:64px 28px 56px;border-radius:24px;border:1px solid var(--border);position:relative;overflow:hidden;background:radial-gradient(circle at 12% 18%,color-mix(in srgb,var(--accent) 30%,transparent),transparent 55%),radial-gradient(circle at 90% 85%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 50%),linear-gradient(var(--border) 1px,transparent 1px) 0 0/36px 36px,linear-gradient(90deg,var(--border) 1px,transparent 1px) 0 0/36px 36px,var(--surface)}
+.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:var(--accent);opacity:.12;pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.hero h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.1;letter-spacing:-.03em;margin:0 0 16px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--muted);max-width:560px;font-size:1.1rem;margin:0 0 24px}
+.btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 22px;border-radius:12px;text-decoration:none;font-weight:600;border:0;cursor:pointer;font-size:1rem}
+h2{font-size:1.6rem;letter-spacing:-.02em;margin:48px 0 8px}
+.sub{color:var(--muted);margin:0 0 20px}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:20px}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:4px;font-weight:600}
+select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px}
+.card h3{margin:0 0 6px;font-size:1.05rem}.card p{margin:0 0 12px;color:var(--muted);font-size:.95rem}
+.tag{display:inline-block;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:2px 10px;font-size:.78rem;font-weight:600;margin:0 6px 6px 0}
+.empty{color:var(--muted);padding:20px 0}
+.steps{list-style:none;margin:0;padding:0;border-left:2px solid var(--border);margin-left:12px}
+.steps li{position:relative;padding:0 0 22px 26px}
+.steps li::before{content:attr(data-n);position:absolute;left:-14px;top:0;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:.8rem;font-weight:700;display:grid;place-items:center}
+.steps b{display:block}.steps span{color:var(--muted);font-size:.95rem}
+.steps li.done{opacity:.55}.steps li{cursor:pointer}
+footer{margin:56px 0 24px;color:var(--muted);font-size:.85rem;text-align:center}
+:root{--c2:#ff5d8f;--c3:#ff9f1c;--c4:#14b8a6;--c5:#8b5cf6}
+.hero{background:radial-gradient(circle at 10% 15%,color-mix(in srgb,var(--c2) 32%,transparent),transparent 50%),radial-gradient(circle at 88% 20%,color-mix(in srgb,var(--c3) 28%,transparent),transparent 48%),radial-gradient(circle at 70% 95%,color-mix(in srgb,var(--c4) 30%,transparent),transparent 50%),radial-gradient(circle at 30% 100%,color-mix(in srgb,var(--c5) 28%,transparent),transparent 50%),linear-gradient(var(--border) 1px,transparent 1px) 0 0/36px 36px,linear-gradient(90deg,var(--border) 1px,transparent 1px) 0 0/36px 36px,var(--surface)}
+.hero h1 em{background:linear-gradient(90deg,var(--accent),var(--c5),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{background:linear-gradient(135deg,var(--accent),var(--c5))}
+.btn.alt{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.stats{display:flex;gap:26px;margin-top:30px;flex-wrap:wrap}.stats b{display:block;font-size:1.6rem}.stats span{color:var(--muted);font-size:.85rem}
+.icon{margin-left:16px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 10px;cursor:pointer;font-size:1rem}
+.search{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:1rem;margin-bottom:12px}
+h2::after{content:'';display:block;width:48px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--c2),var(--c3));margin-top:6px}
+.card{border-top:4px solid var(--accent);position:relative;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.14)}
+.card h3{padding-right:28px}
+.card.c1{border-top-color:var(--c2)}.card.c2{border-top-color:var(--c3)}.card.c3{border-top-color:var(--c4)}.card.c4{border-top-color:var(--c5)}
+.card.c1 .tag:first-of-type{background:color-mix(in srgb,var(--c2) 18%,transparent);color:var(--c2)}
+.card.c2 .tag:first-of-type{background:color-mix(in srgb,var(--c3) 20%,transparent);color:var(--c3)}
+.card.c3 .tag:first-of-type{background:color-mix(in srgb,var(--c4) 20%,transparent);color:var(--c4)}
+.card.c4 .tag:first-of-type{background:color-mix(in srgb,var(--c5) 20%,transparent);color:var(--c5)}
+.card.hl{outline:3px solid var(--c3)}
+.fav{position:absolute;right:12px;top:12px;background:none;border:0;font-size:1.35rem;cursor:pointer;color:var(--c2);line-height:1}
+.bar{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin-bottom:8px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c4),var(--accent),var(--c5));transition:width .3s}
+.steps li::before{background:linear-gradient(135deg,var(--accent),var(--c5))}
+.badge{display:inline-block;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:6px 14px;font-size:.85rem;font-weight:600;margin-bottom:16px}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.feat .ic{font-size:1.8rem;display:block;margin-bottom:8px}
+details{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:10px 0 0;color:var(--muted)}
+.cta{margin-top:48px;border-radius:24px;padding:44px 28px;text-align:center;color:#fff;background:linear-gradient(135deg,var(--accent),var(--c5) 55%,var(--c2))}
+.cta h2{margin:0 0 8px;color:#fff}.cta h2::after{display:none}.cta p{margin:0 0 22px;opacity:.92}
+.cta .btn{background:#fff;color:#14182b;margin:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><div class="logo">FYP<span>Navigator</span></div><div><a href="#ideas">Ideas</a><a href="#roadmap">Roadmap</a><a href="#saved">Saved</a><button class="icon" id="th" aria-label="Toggle theme">🌓</button></div></nav>
+
+<section class="hero">
+<div class="badge">🎓 Free for every student</div>
+<h1>Find your final year project. <em>Finish it well.</em></h1>
+<p>Pick a field, set your difficulty and team size, and get project ideas that fit. Then follow a clear roadmap from proposal to defense.</p>
+<div class="btns"><a class="btn" href="#ideas">Find an idea</a><button class="btn alt" id="rnd">🎲 Surprise me</button></div>
+<div class="stats"><div><b id="s1"></b><span>project ideas</span></div><div><b id="s2"></b><span>fields</span></div><div><b id="s3"></b><span>roadmap steps</span></div></div>
+</section>
+
+<section id="why">
+<h2>Why students love it</h2>
+<p class="sub">Stop wasting weeks searching. Start building.</p>
+<div class="feat">
+<div class="card c0"><span class="ic">🎯</span><h3>Ideas that fit you</h3><p>Filter by field, difficulty and team size to find a project you can actually finish.</p></div>
+<div class="card c1"><span class="ic">🗺️</span><h3>A clear roadmap</h3><p>Eight steps from team and supervisor to the final defense.</p></div>
+<div class="card c2"><span class="ic">💾</span><h3>Save favourites</h3><p>Heart the ideas you like and compare them later in one place.</p></div>
+<div class="card c3"><span class="ic">📱</span><h3>Works everywhere</h3><p>Fast on phones and laptops, in light or dark mode.</p></div>
+</div>
+</section>
+
+<section id="ideas">
+<h2>Idea finder</h2>
+<p class="sub">Filter by what fits you. Ideas are starting points, so adapt them with your supervisor.</p>
+<input class="search" id="q" type="search" placeholder="Search ideas, e.g. mobile, sensor, security…" aria-label="Search ideas">
+<div class="filters">
+<div><label for="f">Field</label><select id="f"><option value="">All fields</option></select></div>
+<div><label for="d">Difficulty</label><select id="d"><option value="">Any</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></div>
+<div><label for="t">Team size</label><select id="t"><option value="">Any</option><option>1</option><option>2</option><option>3</option></select></div>
+</div>
+<div class="grid" id="list"></div>
+<div class="empty" id="empty" hidden>No ideas match. Try loosening a filter.</div>
+</section>
+
+<section id="saved">
+<h2>Saved ideas</h2>
+<p class="sub">Tap the heart on any idea to keep it here.</p>
+<div class="grid" id="sl"></div>
+<div class="empty" id="se">Nothing saved yet.</div>
+</section>
+
+<section id="roadmap">
+<h2>Your FYP roadmap</h2>
+<p class="sub">Tap a step to mark it done.</p>
+<div class="bar"><i id="pb"></i></div><p class="sub" id="pt"></p>
+<ol class="steps" id="steps"></ol>
+</section>
+
+<section id="faq">
+<h2>Questions</h2>
+<details><summary>What is an FYP?</summary><p>A Final Year Project is the capstone work students complete in their last year of a degree, usually with a supervisor and a final defense.</p></details>
+<details><summary>Is FYP Navigator free?</summary><p>Yes. Browse ideas, save favourites and follow the roadmap at no cost.</p></details>
+<details><summary>Can I use an idea exactly as listed?</summary><p>Treat each idea as a starting point. Adapt the scope and add your own twist with your supervisor so the work is truly yours.</p></details>
+<details><summary>How do I choose a good idea?</summary><p>Pick something you find interesting, check that the data or hardware is available, and make sure it fits your team size and timeline.</p></details>
+</section>
+
+<div class="cta">
+<h2>Ready to start your FYP?</h2>
+<p>Find your idea today, and share the site with your classmates.</p>
+<a class="btn" href="#ideas">Browse ideas</a><button class="btn" id="shr">📣 Share with friends</button>
+</div>
+
+<footer>FYP Navigator · a starting point for your final year project</footer>
+</div>
+<script>
+var IDEAS=[
+["AI / ML","Urdu Sentiment Analyzer","Classify social media posts in Urdu and Roman Urdu using a fine-tuned language model.","Intermediate","2"],
+["AI / ML","Crop Disease Detector","Mobile app that identifies plant diseases from leaf photos using a CNN.","Intermediate","3"],
+["AI / ML","Smart Resume Screener","Rank resumes against a job description using embeddings and explain the match.","Beginner","2"],
+["Web & Mobile","Campus Ride Share","Carpooling app for university students with route matching and safety checks.","Intermediate","3"],
+["Web & Mobile","Local Skills Marketplace","Platform connecting freelancers and customers for neighborhood services.","Beginner","2"],
+["Web & Mobile","Study Group Matcher","Match students by course, schedule and learning style, with a built-in chat.","Beginner","1"],
+["IoT","Smart Energy Monitor","Track household power usage with sensors and show savings tips on a dashboard.","Intermediate","2"],
+["IoT","Water Tank Level Alert","Ultrasonic sensing with SMS alerts and automatic pump control.","Beginner","1"],
+["IoT","Air Quality Mapper","Low-cost sensor nodes that build a live pollution map of the city.","Advanced","3"],
+["Cybersecurity","Phishing URL Detector","Browser extension that flags suspicious links using ML and URL features.","Intermediate","2"],
+["Cybersecurity","Network Intrusion Dashboard","Detect anomalies in traffic logs and visualize alerts in real time.","Advanced","3"],
+["Data Science","Exam Result Predictor","Predict at-risk students early from attendance and assessment data.","Beginner","2"],
+["Data Science","Traffic Congestion Forecast","Time-series model for peak-hour congestion on major city routes.","Advanced","2"],
+["Blockchain","Degree Verification System","Tamper-proof certificate issuing and instant verification for employers.","Advanced","3"],
+["Game Dev","Learning Through Play","2D educational game teaching primary school math with adaptive levels.","Beginner","2"]
+];
+var STEPS=[
+["Form your team and pick a supervisor","Choose people you can work with, then approach supervisors whose interests match yours."],
+["Shortlist and validate ideas","Check feasibility, data availability and novelty. Talk to real users if you can."],
+["Write the proposal","Problem, objectives, scope, methodology, timeline and expected outcomes."],
+["Requirements and design","Finalize features, architecture, database and UI mockups."],
+["Build in sprints","Ship small working pieces every two weeks and show your supervisor."],
+["Test and evaluate","Run unit tests, user testing and measure results against your objectives."],
+["Documentation and report","Write as you build, then polish the final report and references."],
+["Demo and defense","Prepare a clear story, a stable demo and answers to likely questions."]
+];
+var FAV=[];try{FAV=JSON.parse(localStorage.getItem('fypFav')||'[]')}catch(e){}
+var Q=document.getElementById("q"),F=document.getElementById("f"),D=document.getElementById("d"),T=document.getElementById("t"),L=document.getElementById("list"),E=document.getElementById("empty");
+var fields=[];IDEAS.forEach(function(i){if(fields.indexOf(i[0])<0)fields.push(i[0])});
+fields.forEach(function(x){var o=document.createElement("option");o.textContent=x;F.appendChild(o)});
+function esc(s){return s.replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+function render(){
+var r=IDEAS.filter(function(i){return(!F.value||i[0]===F.value)&&(!D.value||i[3]===D.value)&&(!T.value||i[4]===T.value)&&(!Q.value||(i[1]+' '+i[2]+' '+i[0]).toLowerCase().indexOf(Q.value.toLowerCase())>-1)});
+L.innerHTML=r.map(function(i){return '<div class="card c'+(fields.indexOf(i[0])%5)+'"><button class="fav" data-t="'+esc(i[1])+'" aria-label="Save idea">'+(FAV.indexOf(i[1])>-1?'♥':'♡')+'</button><h3>'+esc(i[1])+'</h3><p>'+esc(i[2])+'</p><span class="tag">'+esc(i[0])+'</span><span class="tag">'+esc(i[3])+'</span><span class="tag">Team of '+i[4]+'</span></div>'}).join("");
+E.hidden=r.length>0}
+[Q,F,D,T].forEach(function(s){s.addEventListener('input',render)});render();
+var done={};try{done=JSON.parse(localStorage.getItem("fypDone")||"{}")}catch(e){}
+var S=document.getElementById("steps");
+function steps(){S.innerHTML=STEPS.map(function(s,i){return '<li data-n="'+(i+1)+'" data-i="'+i+'"'+(done[i]?' class="done"':'')+'><b>'+s[0]+'</b><span>'+s[1]+'</span></li>'}).join("")}
+S.addEventListener("click",function(e){var li=e.target.closest("li");if(!li)return;var i=li.dataset.i;done[i]=!done[i];try{localStorage.setItem("fypDone",JSON.stringify(done))}catch(x){}steps()});
+steps();
+var SL=document.getElementById('sl'),SE=document.getElementById('se');
+function renderSaved(){var r=IDEAS.filter(function(i){return FAV.indexOf(i[1])>-1});SL.innerHTML=r.map(function(i){return '<div class="card c'+(fields.indexOf(i[0])%5)+'"><button class="fav" data-t="'+esc(i[1])+'" aria-label="Remove">♥</button><h3>'+esc(i[1])+'</h3><p>'+esc(i[2])+'</p><span class="tag">'+esc(i[0])+'</span><span class="tag">'+esc(i[3])+'</span></div>'}).join('');SE.hidden=r.length>0}
+document.addEventListener('click',function(e){var b=e.target.closest('.fav');if(!b)return;var t=b.dataset.t,k=FAV.indexOf(t);if(k>-1)FAV.splice(k,1);else FAV.push(t);try{localStorage.setItem('fypFav',JSON.stringify(FAV))}catch(x){}render();renderSaved()});
+document.getElementById('rnd').addEventListener('click',function(){var i=IDEAS[Math.floor(Math.random()*IDEAS.length)];Q.value=F.value=D.value=T.value='';render();var b=L.querySelector('.fav[data-t="'+i[1]+'"]');if(b){var c=b.parentNode;c.classList.add('hl');c.scrollIntoView({block:'center',behavior:'smooth'});setTimeout(function(){c.classList.remove('hl')},2500)}});
+document.getElementById('th').addEventListener('click',function(){var r=document.documentElement,a=r.getAttribute('data-theme'),d=a==='dark'||(a!=='light'&&matchMedia('(prefers-color-scheme:dark)').matches);r.setAttribute('data-theme',d?'light':'dark')});
+function steps(){S.innerHTML=STEPS.map(function(s,i){return '<li data-n="'+(i+1)+'" data-i="'+i+'"'+(done[i]?' class="done"':'')+'><b>'+s[0]+'</b><span>'+s[1]+'</span></li>'}).join('');var n=STEPS.filter(function(s,i){return done[i]}).length;document.getElementById('pb').style.width=(n/STEPS.length*100)+'%';document.getElementById('pt').textContent=n+' of '+STEPS.length+' steps done'}
+steps();renderSaved();
+document.getElementById('shr').addEventListener('click',function(){var b=this,u=location.href;if(navigator.share){navigator.share({title:'FYP Navigator',text:'Find your final year project idea',url:u}).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(u).then(function(){b.textContent='Link copied ✓'})}});
+document.getElementById('s1').textContent=IDEAS.length;document.getElementById('s2').textContent=fields.length;document.getElementById('s3').textContent=STEPS.length;
+</script>
+</body>
+</html>
